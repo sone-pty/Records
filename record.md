@@ -24,6 +24,16 @@
 1. npc--->onEntry()--->检查场景是否开启AI--->createNpcAI()
 ```
 
+## 战斗和副本相关
+- 造成伤害的方式：最终都调用`DoDamage`方法
+    + 直接伤害(DamageTarget) 
+    + 按攻击公式计算后造成伤害(DamageTargetWithAttack) 
+    + 分担伤害(ShareDamage)
+```c++
+// 伤害事件
+FightModule::DoDamage()=>FightModule::NoticeDamage()=>CloneSceneModule::OnCommandDamageTarget()
+//
+```
 ## C++
 - __thread只支持POD对象，且只能静态初始化；pthread_key_t可以存储复杂对象
 
@@ -33,6 +43,9 @@
 - 线程安全的observer模式：使用智能指针`shared_ptr`和`weak_ptr`而不是加锁；`weak_ptr`的提升操作是线程安全的；但`shared_ptr`只是保证了引用计数的线程安全而不会保证智能指针本身读写的安全，只能由多个线程读，但不能多个线程同时读写
 - 单线程eventloop有一个明显的缺点，对优先级不敏感，优先级高的连接不能得到及时处理；对于这种情况可以采用多线程eventloop来避免
 - 多线程对于IO或者计算很容易到达瓶颈的场景无能为力，在这两种情形下，选择单线程
+- 防止死锁
+
+![](/pic/prevent_dead_lock.png)
 
 ## 设计模式
 - 组合、关联和聚合: 组合表示部分与整体，部分的生命周期归整体管理；关联表示一种使用，形式上看A持有B的指针或者引用；聚合也是部分与整体，不过部分的生命周期不由整体控制
