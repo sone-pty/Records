@@ -188,3 +188,22 @@ FightModule::DoDamage()=>FightModule::NoticeDamage()=>CloneSceneModule::OnComman
 7. `next`, `step`, `continue` 等命令：这些命令在多线程环境下同样适用，可以用来单步执行、跳过、继续执行等操作。
 
 使用以上命令可以实现在 GDB 中对多线程程序进行调试。需要注意的是，多线程调试比单线程调试更加复杂，需要仔细考虑各个线程之间的交互和状态同步问题，以避免出现死锁等问题。
+
+
+## Rust
+
+vscode的settings.json
+```
+{
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "*.mutable": {
+                "underline": false,
+            }
+        }
+    },
+
+    "editor.inlayHints.enabled": "off"
+}
+```
